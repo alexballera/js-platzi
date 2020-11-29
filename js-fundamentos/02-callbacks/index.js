@@ -24,13 +24,25 @@ function onError(id) {
     console.log(`Sucedió un error al obtener al personaje ${id}`);
 }
 
-// Múltiples promesas en paralelo
-var ids = [1, 2, 3, 4, 5, 6, 7]
-var promesas = ids.map(id => obtenerPersonaje(id));
-Promise
-    .all(promesas)
-    .then(personajes => console.log(personajes))
-    .catch(onError)
+// Async await - usamos try catch
+async function obtenerPersonajes() {
+    // Múltiples promesas en paralelo
+    var ids = [1, 2, 3, 4, 5, 6, 7]
+    var promesas = ids.map(id => obtenerPersonaje(id));
+
+    try {
+        var personajes = await Promise.all(promesas)
+        console.log(personajes)
+    } catch (id) {
+        onError(id)
+    }
+
+    // Promise
+    //     .all(promesas)
+    //     .then(personajes => console.log(personajes))
+    //     .catch(onError)
+}
+obtenerPersonajes()
 
 // obtenerPersonaje(1)
 //     .then(personaje =>{
