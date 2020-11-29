@@ -5,8 +5,12 @@ class Persona {
     this.altura = altura
   }
 
-  saludar() {
-    console.log(`Hola, me llamo ${this.nombre} ${this.apellido}`);
+  saludar(fn) {
+    var {nombre, apellido} = this
+    console.log(`Hola, me llamo ${nombre} ${apellido}`);
+    if (fn) {
+      fn(nombre, apellido)
+    }
   }
 
   soyAlto() {
@@ -14,12 +18,34 @@ class Persona {
   }
 }
 
+// Hereda de Persona con extends
 class Desarrollador extends Persona {
   constructor(nombre, apellido, altura) {
     super(nombre, apellido, altura)
   }
 
-  saludar() {
-    console.log(`Hola, me llamo ${this.nombre} ${this.apellido} y soy desarrollador`);
+  saludar(fn) {
+    var {nombre , apellido} = this
+    console.log(`Hola, me llamo ${nombre} ${apellido} y soy desarrollador`);
+
+    if (fn) {
+      fn(nombre, apellido, true)
+    }
   }
 }
+
+function responderSaludo(nombre, apellido, esDev) {
+  console.log(`Buen día ${nombre} ${apellido}`);
+
+  if (esDev) {
+    console.log('No sabía que eres desarrollador');
+  }
+}
+
+var alex = new Persona('Alex', 'Ballera', 1.81)
+var jose = new Persona('Jose', 'Lugo', 1.71)
+var pedro = new Desarrollador('Pedro', 'Bolivar', 1.91)
+
+alex.saludar()
+jose.saludar(responderSaludo)
+pedro.saludar(responderSaludo)
