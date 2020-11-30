@@ -8,7 +8,7 @@ class Juego {
   constructor() {
     this.inicializar()
     this.generarSecuencia()
-    console.log(this);
+    this.siguienteNivel()
   }
 
   inicializar() {
@@ -25,6 +25,38 @@ class Juego {
   generarSecuencia() {
     this.secuencia = new Array(10).fill(0).map(n => Math.floor(Math.random() * 4))
   }
+
+  siguienteNivel() {
+    this.iluminarSecuencia()
+  }
+
+  transformarNumeroAColor(num) {
+    const color = {
+      0: 'celeste',
+      1: 'violeta',
+      2: 'naranja',
+      3: 'verde'
+    }
+    return color[num]
+  }
+
+  iluminarSecuencia() {
+    for (let i = 0; i < this.nivel; i++) {
+      const color = this.transformarNumeroAColor(this.secuencia[i])
+      setTimeout(() => this.iluminarColor(color), 1000 * i)
+    }
+  }
+
+  iluminarColor(color) {
+    this.colores[color].classList.add('light')
+
+    setTimeout(() => this.apagarColor(color), 350)
+  }
+
+  apagarColor(color) {
+    this.colores[color].classList.remove('light')
+  }
+
 }
 
 function empezarJuego() {
