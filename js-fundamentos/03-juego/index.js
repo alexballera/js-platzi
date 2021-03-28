@@ -50,7 +50,7 @@ class Juego {
   iluminarColor(color) {
     this.colores[color].classList.add('light')
 
-    setTimeout(() => this.apagarColor(color), 350)
+    setTimeout(() => this.apagarColor(color), 1000 / 3)
   }
 
   apagarColor(color) {
